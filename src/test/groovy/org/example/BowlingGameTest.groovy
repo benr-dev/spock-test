@@ -41,4 +41,16 @@ class BowlingGameTest extends Specification {
         then:
         game.score == 16
     }
+
+    def "strike followed by 3,3 then all gutters should have 22 score"() {
+        setup:
+        def game = new BowlingGame()
+
+        when:
+        def scorecard = [10, 3,3, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0] as int[]
+        game.roll scorecard
+
+        then:
+        game.score == 22
+    }
 }

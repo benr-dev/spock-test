@@ -18,6 +18,10 @@ public class BowlingGame {
         int rollNumber = 0;
 
         for(int frame = 1; frame <= 10; frame++) {
+            if(isAStrike(rollNumber)) {
+                sum += getStrikeFrameScore(rollNumber);
+                rollNumber += 1;
+            }
             if(isASpare(rollNumber)) {
                 sum += getSpareFrameScore(rollNumber);
                 rollNumber += 2;
@@ -31,6 +35,14 @@ public class BowlingGame {
         return sum;
     }
 
+    private boolean isASpare(int rollNumber) {
+        return getRegularFrameScore(rollNumber) == 10;
+    }
+
+    private boolean isAStrike(int rollNumber) {
+        return scorecard[rollNumber] == 10;
+    }
+
     private int getRegularFrameScore(int rollNumber) {
         return scorecard[rollNumber] + scorecard[rollNumber + 1];
     }
@@ -39,7 +51,8 @@ public class BowlingGame {
         return 10 + scorecard[rollNumber + 2];
     }
 
-    private boolean isASpare(int rollNumber) {
-        return getRegularFrameScore(rollNumber) == 10;
+    private int getStrikeFrameScore(int rollNumber) {
+        return 10 + getRegularFrameScore(rollNumber + 1);
     }
+
 }
