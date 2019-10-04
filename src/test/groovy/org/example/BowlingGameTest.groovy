@@ -18,8 +18,10 @@ class BowlingGameTest extends Specification {
 
     @Unroll
     def "scorecard #scorecard has score #score"() {
-        expect:
+        when:
         game.roll scorecard
+
+        then:
         game.score == score
 
         where:
