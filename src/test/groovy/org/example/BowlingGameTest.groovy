@@ -29,4 +29,16 @@ class BowlingGameTest extends Specification {
         then:
         game.score == 20
     }
+
+    def "spare followed by 3 then all gutters should have 16 score"() {
+        setup:
+        def game = new BowlingGame()
+
+        when:
+        def scorecard = [5,5, 3,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0] as int[]
+        game.roll scorecard
+
+        then:
+        game.score == 16
+    }
 }

@@ -15,9 +15,17 @@ public class BowlingGame {
 
     public int getScore() {
         int sum = 0;
+        int rollNumber = 0;
 
-        for(int score : scorecard) {
-            sum += score;
+        for(int frame = 1; frame <= 10; frame++) {
+            if(scorecard[rollNumber] + scorecard[rollNumber + 1] == 10) {
+                sum += 10 + scorecard[rollNumber + 2];
+                rollNumber += 2;
+            }
+            else {
+                sum += scorecard[rollNumber] + scorecard[rollNumber + 1];
+                rollNumber += 2;
+            }
         }
 
         return sum;
