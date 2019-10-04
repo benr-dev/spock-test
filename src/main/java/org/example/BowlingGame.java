@@ -4,11 +4,22 @@
 package org.example;
 
 public class BowlingGame {
-    public void roll(int... pinsDown) {
+    private int[] scorecard = new int[21];
+    private int rollNumber = 0;
 
+    public void roll(int... pinsDown) {
+        for(int i : pinsDown) {
+            scorecard[rollNumber++] = i;
+        }
     }
 
     public int getScore() {
-        return 0;
+        int sum = 0;
+
+        for(int score : scorecard) {
+            sum += score;
+        }
+
+        return sum;
     }
 }

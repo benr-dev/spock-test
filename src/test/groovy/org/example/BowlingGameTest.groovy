@@ -17,4 +17,16 @@ class BowlingGameTest extends Specification {
         then:
         game.score == 0
     }
+
+    def "all 1s game should have 20 score"() {
+        setup:
+        def game = new BowlingGame()
+
+        when:
+        def scorecard = [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1] as int[]
+        game.roll scorecard
+
+        then:
+        game.score == 20
+    }
 }
