@@ -4,15 +4,20 @@
 package org.example
 
 import spock.lang.Specification
+import spock.lang.Subject
 import spock.lang.Unroll
 
 class BowlingGameTest extends Specification {
 
+    @Subject
+    BowlingGame game
+
+    def setup() {
+        game = new BowlingGame()
+    }
+
     @Unroll
     def "scorecard #scorecard has score #score"() {
-        setup:
-        def game = new BowlingGame()
-
         expect:
         game.roll scorecard
         game.score == score
@@ -29,9 +34,6 @@ class BowlingGameTest extends Specification {
 
 
     def "spare followed by 3 then all gutters should have 16 score"() {
-        setup:
-        def game = new BowlingGame()
-
         when:
         def scorecard = [5,5, 3,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0] as int[]
         game.roll scorecard
@@ -41,9 +43,6 @@ class BowlingGameTest extends Specification {
     }
 
     def "strike followed by 3,3 then all gutters should have 22 score"() {
-        setup:
-        def game = new BowlingGame()
-
         when:
         def scorecard = [10, 3,3, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0] as int[]
         game.roll scorecard
