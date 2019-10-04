@@ -4,31 +4,29 @@
 package org.example
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class BowlingGameTest extends Specification {
-    def "gutter game should have 0 score"() {
+
+    @Unroll
+    def "scorecard #scorecard has score #score"() {
         setup:
         def game = new BowlingGame()
 
-        when:
-        def scorecard = [0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0] as int[]
+        expect:
         game.roll scorecard
+        game.score == score
 
-        then:
-        game.score == 0
+        where:
+        scorecard                                                   | score
+        [0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0] as int[] | 0
+        [0,1, 0,1, 0,1, 0,1, 0,1, 0,1, 0,1, 0,1, 0,1, 0,1] as int[] | 10
+        [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1] as int[] | 20
+        [1,2, 1,2, 1,2, 1,2, 1,2, 1,2, 1,2, 1,2, 1,2, 1,2] as int[] | 30
+        [2,2, 2,2, 2,2, 2,2, 2,2, 2,2, 2,2, 2,2, 2,2, 2,2] as int[] | 40
+        [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] as int[]   | 300
     }
 
-    def "all 1s game should have 20 score"() {
-        setup:
-        def game = new BowlingGame()
-
-        when:
-        def scorecard = [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1] as int[]
-        game.roll scorecard
-
-        then:
-        game.score == 20
-    }
 
     def "spare followed by 3 then all gutters should have 16 score"() {
         setup:
@@ -52,17 +50,5 @@ class BowlingGameTest extends Specification {
 
         then:
         game.score == 22
-    }
-
-    def "maximum score game should have 300 score"() {
-        setup:
-        def game = new BowlingGame()
-
-        when:
-        def scorecard = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] as int[]
-        game.roll scorecard
-
-        then:
-        game.score == 300
     }
 }
