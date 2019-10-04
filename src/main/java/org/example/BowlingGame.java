@@ -18,16 +18,28 @@ public class BowlingGame {
         int rollNumber = 0;
 
         for(int frame = 1; frame <= 10; frame++) {
-            if(scorecard[rollNumber] + scorecard[rollNumber + 1] == 10) {
-                sum += 10 + scorecard[rollNumber + 2];
+            if(isASpare(rollNumber)) {
+                sum += getSpareFrameScore(rollNumber);
                 rollNumber += 2;
             }
             else {
-                sum += scorecard[rollNumber] + scorecard[rollNumber + 1];
+                sum += getRegularFrameScore(rollNumber);
                 rollNumber += 2;
             }
         }
 
         return sum;
+    }
+
+    private int getRegularFrameScore(int rollNumber) {
+        return scorecard[rollNumber] + scorecard[rollNumber + 1];
+    }
+
+    private int getSpareFrameScore(int rollNumber) {
+        return 10 + scorecard[rollNumber + 2];
+    }
+
+    private boolean isASpare(int rollNumber) {
+        return getRegularFrameScore(rollNumber) == 10;
     }
 }
