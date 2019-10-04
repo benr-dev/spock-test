@@ -22,7 +22,7 @@ public class BowlingGame {
                 sum += getStrikeFrameScore(rollNumber);
                 rollNumber += 1;
             }
-            if(isASpare(rollNumber)) {
+            else if(isASpare(rollNumber)) {
                 sum += getSpareFrameScore(rollNumber);
                 rollNumber += 2;
             }

@@ -53,4 +53,16 @@ class BowlingGameTest extends Specification {
         then:
         game.score == 22
     }
+
+    def "maximum score game should have 300 score"() {
+        setup:
+        def game = new BowlingGame()
+
+        when:
+        def scorecard = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] as int[]
+        game.roll scorecard
+
+        then:
+        game.score == 300
+    }
 }
